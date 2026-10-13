@@ -9,11 +9,11 @@
 </p>
 
 <p align="center">
+  <a href="https://cosmos-live.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-cosmos--live.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
   <a href="#-live-telemetry--data-sources"><img src="https://img.shields.io/badge/Data-NASA%20Open%20APIs-0B3D91?style=for-the-badge&logo=nasa&logoColor=white" alt="NASA Data" /></a>
   <a href="#-interactive-capabilities--features"><img src="https://img.shields.io/badge/3D%20Engine-Three.js%20%2F%20WebGL-049EF4?style=for-the-badge&logo=three.js&logoColor=white" alt="Three.js" /></a>
   <a href="https://react.dev"><img src="https://img.shields.io/badge/Framework-React%2019%20%2B%20TypeScript-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" /></a>
   <a href="https://vite.dev"><img src="https://img.shields.io/badge/Bundler-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
-  <a href="https://vercel.com"><img src="https://img.shields.io/badge/Deployment-Vercel%20Edge-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel" /></a>
   <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
 </p>
 
