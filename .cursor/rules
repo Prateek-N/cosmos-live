@@ -1,0 +1,27 @@
+# agents-maker — Cursor Rules
+# Auto-generated: python agents-maker/tools/generate_platform_configs.py
+# Regenerate after domain/phase changes.
+
+## Active Domain
+software  (confidence: high)
+
+## Stack
+unknown
+
+## Current Phase
+Task Framing (`task_framing`)
+
+## Agent Routing
+All tasks in this project route through the agents-maker multi-agent framework.
+Orchestrator is always active. Specialist agents for this phase: orchestrator (routing).
+
+## Instructions
+- Apply domain routing and phase context from agents-maker before every task.
+- Match output style to phase: implementation → code; design → tables; review → severity ratings.
+- After every response: append a [Companion] block with 3 ranked next steps.
+- Include a `Command:` line the user can copy to continue the workflow.
+- Keep responses token-efficient. Prefer bullets over prose.
+
+## Kit Location
+agents-maker/
+Regenerate: `python agents-maker/tools/generate_platform_configs.py`
