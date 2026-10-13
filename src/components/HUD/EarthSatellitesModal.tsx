@@ -90,11 +90,27 @@ export const EarthSatellitesModal: React.FC<EarthSatellitesModalProps> = ({
           onClose();
         }
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md pointer-events-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 pointer-events-auto font-sans"
+      style={{
+        background: 'rgba(2, 6, 23, 0.94)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+      }}
     >
-      <div className="w-full max-w-5xl h-[88vh] bg-slate-900/95 border border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-slate-100">
+      <div
+        className="flex flex-col rounded-3xl overflow-hidden text-slate-100 shadow-2xl relative"
+        style={{
+          width: '95%',
+          maxWidth: '1240px',
+          height: '88vh',
+          maxHeight: '880px',
+          background: 'linear-gradient(135deg, #090e1a 0%, #060a14 50%, #030712 100%)',
+          border: '1px solid rgba(6, 182, 212, 0.25)',
+          boxShadow: '0 0 60px rgba(0, 0, 0, 0.8)',
+        }}
+      >
         {/* HEADER BAR */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/60 shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/70 shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 rounded-2xl bg-cyan-950 border border-cyan-800 flex items-center justify-center text-cyan-400">
               <Satellite className="w-5 h-5 animate-pulse" />
@@ -163,10 +179,13 @@ export const EarthSatellitesModal: React.FC<EarthSatellitesModalProps> = ({
           </div>
         </div>
 
-        {/* MAIN BODY: 2-COLUMN SPLIT */}
-        <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
-          {/* LEFT COLUMN: SATELLITE LIST */}
-          <div className="w-full md:w-5/12 h-48 md:h-full border-b md:border-b-0 md:border-r border-slate-800 overflow-y-auto custom-scrollbar p-3 space-y-2 bg-slate-950/30 shrink-0">
+        {/* MAIN BODY: 2-COLUMN SPLIT (40% LIST + 60% DOSSIER) */}
+        <div className="flex-1 flex overflow-hidden min-h-0 modal-split-layout">
+          {/* LEFT COLUMN: SATELLITE LIST (40%) */}
+          <div
+            className="flex flex-col overflow-y-auto custom-scrollbar p-3 space-y-2 bg-slate-950/40 shrink-0 modal-split-left"
+            style={{ width: '40%', height: '100%', minHeight: 0, borderRight: '1px solid rgba(51, 65, 85, 0.6)' }}
+          >
             <div className="px-2 py-1 text-[11px] font-mono text-slate-500 flex items-center justify-between">
               <span>ORBITING SPACECRAFT ({filteredSatellites.length})</span>
               <span>ALTITUDE / REGIME</span>
@@ -223,8 +242,11 @@ export const EarthSatellitesModal: React.FC<EarthSatellitesModalProps> = ({
             )}
           </div>
 
-          {/* RIGHT COLUMN: SATELLITE ORIGIN & MISSION DOSSIER */}
-          <div className="flex-1 h-full overflow-y-auto custom-scrollbar p-6 space-y-5 bg-slate-900/40 min-h-0">
+          {/* RIGHT COLUMN: SATELLITE ORIGIN & MISSION DOSSIER (60%) */}
+          <div
+            className="flex flex-col overflow-y-auto custom-scrollbar p-6 space-y-5 bg-slate-900/40 min-h-0 modal-split-right"
+            style={{ width: '60%', height: '100%', minHeight: 0 }}
+          >
             {/* SATELLITE HEADER */}
             <div className="space-y-2 pb-4 border-b border-slate-800">
               <div className="flex items-center justify-between">

@@ -100,9 +100,25 @@ export const EarthEpicModal: React.FC<EarthEpicModalProps> = ({ isOpen, onClose 
           onClose();
         }
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-6 bg-black/80 backdrop-blur-md pointer-events-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 pointer-events-auto font-sans"
+      style={{
+        background: 'rgba(2, 6, 23, 0.94)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+      }}
     >
-      <div className="w-full max-w-5xl h-[90vh] bg-slate-900/95 border border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden text-slate-100">
+      <div
+        className="flex flex-col rounded-3xl overflow-hidden text-slate-100 shadow-2xl relative"
+        style={{
+          width: '95%',
+          maxWidth: '1240px',
+          height: '88vh',
+          maxHeight: '880px',
+          background: 'linear-gradient(135deg, #090e1a 0%, #060a14 50%, #030712 100%)',
+          border: '1px solid rgba(56, 189, 248, 0.25)',
+          boxShadow: '0 0 60px rgba(0, 0, 0, 0.8)',
+        }}
+      >
         {/* HEADER BAR */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800 bg-slate-950/70 shrink-0">
           <div className="flex items-center gap-3">
@@ -135,10 +151,13 @@ export const EarthEpicModal: React.FC<EarthEpicModalProps> = ({ isOpen, onClose 
           </button>
         </div>
 
-        {/* MAIN BODY */}
-        <div className="flex-1 flex flex-col md:flex-row overflow-hidden min-h-0">
-          {/* LEFT: INTERACTIVE IMAGE VIEWER & ROTATION TIMELAPSE */}
-          <div className="flex-1 flex flex-col p-4 bg-slate-950/60 overflow-y-auto custom-scrollbar">
+        {/* MAIN BODY (68% LEFT VIEWER + 32% RIGHT TELEMETRY) */}
+        <div className="flex-1 flex overflow-hidden min-h-0 modal-split-layout">
+          {/* LEFT: INTERACTIVE IMAGE VIEWER & ROTATION TIMELAPSE (68%) */}
+          <div
+            className="flex flex-col p-4 bg-slate-950/60 overflow-y-auto custom-scrollbar modal-split-left"
+            style={{ width: '68%', height: '100%', minHeight: 0 }}
+          >
             {/* IMAGE CONTAINER */}
             <div className="relative flex-1 min-h-[300px] flex items-center justify-center bg-black/90 rounded-2xl border border-slate-800 overflow-hidden shadow-2xl group">
               {isLoading || !currentImg ? (
@@ -263,8 +282,17 @@ export const EarthEpicModal: React.FC<EarthEpicModalProps> = ({ isOpen, onClose 
             </div>
           </div>
 
-          {/* RIGHT: SCIENTIFIC TELEMETRY & ABOUT DSCOVR */}
-          <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-slate-800 bg-slate-950/40 p-4 space-y-4 overflow-y-auto custom-scrollbar shrink-0">
+          {/* RIGHT: SCIENTIFIC TELEMETRY & ABOUT DSCOVR (32%) */}
+          <div
+            className="flex flex-col p-4 space-y-4 overflow-y-auto custom-scrollbar modal-split-right"
+            style={{
+              width: '32%',
+              height: '100%',
+              minHeight: 0,
+              background: 'rgba(15, 23, 42, 0.65)',
+              borderLeft: '1px solid rgba(51, 65, 85, 0.6)',
+            }}
+          >
             {/* SPACECRAFT TELEMETRY CARD */}
             <div className="p-3.5 rounded-2xl bg-slate-900/90 border border-slate-800 space-y-3 font-mono text-xs">
               <div className="flex items-center gap-2 text-cyan-400 font-bold uppercase tracking-wider text-[11px]">

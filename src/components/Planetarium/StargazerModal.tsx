@@ -324,10 +324,34 @@ export const StargazerModal: React.FC<StargazerModalProps> = ({ isOpen, onClose,
   );
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-slate-950/85 backdrop-blur-xl animate-fade-in font-sans">
-      <div className="relative w-full max-w-6xl h-[92vh] flex flex-col rounded-3xl bg-slate-900/95 border border-slate-700/80 shadow-2xl overflow-hidden text-slate-100">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 font-sans"
+      style={{
+        background: 'rgba(2, 6, 23, 0.94)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          sound.playClick();
+          onClose();
+        }
+      }}
+    >
+      <div
+        className="relative flex flex-col rounded-3xl overflow-hidden text-slate-100 shadow-2xl"
+        style={{
+          width: '95%',
+          maxWidth: '1240px',
+          height: '88vh',
+          maxHeight: '880px',
+          background: 'linear-gradient(135deg, #090e1a 0%, #060a14 50%, #030712 100%)',
+          border: '1px solid rgba(99, 102, 241, 0.25)',
+          boxShadow: '0 0 60px rgba(99, 102, 241, 0.15)',
+        }}
+      >
         {/* --- HEADER --- */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800/80 bg-slate-950/60 shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-slate-800/80 bg-slate-950/70 shrink-0">
           <div className="flex items-center gap-3">
             <div className="p-2.5 rounded-2xl bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
               <Eye className="w-5 h-5 animate-pulse" />
@@ -379,11 +403,14 @@ export const StargazerModal: React.FC<StargazerModalProps> = ({ isOpen, onClose,
           </div>
         </div>
 
-        {/* --- MAIN SPLIT (360° PLANETARIUM DOME + CONSTELLATION DOSSIER) --- */}
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
-          {/* LEFT: 360° PLANETARIUM DOME CANVAS */}
-          <div className="relative flex-1 h-[45vh] lg:h-auto bg-slate-950 overflow-hidden">
-            <div ref={canvasMountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
+        {/* --- MAIN SPLIT (58% 360° PLANETARIUM DOME + 42% CONSTELLATION DOSSIER) --- */}
+        <div className="flex-1 flex overflow-hidden relative modal-split-layout" style={{ minHeight: 0 }}>
+          {/* LEFT: 360° PLANETARIUM DOME CANVAS (58%) */}
+          <div
+            className="relative flex flex-col bg-slate-950 overflow-hidden modal-split-left"
+            style={{ width: '58%', height: '100%', minHeight: 0 }}
+          >
+            <div ref={canvasMountRef} className="w-full h-full cursor-grab active:cursor-grabbing" style={{ minHeight: 0 }} />
 
             {/* Compass HUD Badge */}
             <div className="absolute top-4 left-4 pointer-events-none flex flex-col gap-2">
@@ -409,8 +436,17 @@ export const StargazerModal: React.FC<StargazerModalProps> = ({ isOpen, onClose,
             </div>
           </div>
 
-          {/* RIGHT: CONSTELLATIONS & SATELLITE FLYOVER CARDS */}
-          <div className="w-full lg:w-[440px] flex flex-col border-t lg:border-t-0 lg:border-l border-slate-800 bg-slate-900/80 overflow-y-auto p-5 space-y-4">
+          {/* RIGHT: CONSTELLATIONS & SATELLITE FLYOVER CARDS (42%) */}
+          <div
+            className="flex flex-col overflow-y-auto p-5 space-y-4 custom-scrollbar modal-split-right"
+            style={{
+              width: '42%',
+              height: '100%',
+              minHeight: 0,
+              background: 'rgba(15, 23, 42, 0.65)',
+              borderLeft: '1px solid rgba(99, 102, 241, 0.18)',
+            }}
+          >
             {/* Selected Constellation Hero Card */}
             <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800 space-y-3">
               <div className="flex items-start justify-between">

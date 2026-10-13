@@ -375,8 +375,32 @@ export const PlanetarySurfaceModal: React.FC<PlanetarySurfaceModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
-      <div className="bg-slate-900 border border-slate-800 rounded-3xl w-full max-w-7xl h-[92vh] flex flex-col shadow-2xl shadow-black/90 overflow-hidden relative">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 font-sans"
+      style={{
+        background: 'rgba(2, 6, 23, 0.94)',
+        backdropFilter: 'blur(16px)',
+        WebkitBackdropFilter: 'blur(16px)',
+      }}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          sound.playClick();
+          onClose();
+        }
+      }}
+    >
+      <div
+        className="relative flex flex-col rounded-3xl overflow-hidden shadow-2xl text-slate-100"
+        style={{
+          width: '96%',
+          maxWidth: '1360px',
+          height: '88vh',
+          maxHeight: '900px',
+          background: 'linear-gradient(135deg, #090e1a 0%, #060a14 50%, #030712 100%)',
+          border: '1px solid rgba(56, 189, 248, 0.25)',
+          boxShadow: '0 0 60px rgba(0, 0, 0, 0.8)',
+        }}
+      >
         {/* --- MODAL TOP HEADER --- */}
         <div className="px-5 py-3.5 border-b border-slate-800 bg-slate-950/70 flex flex-wrap items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-3">
@@ -520,11 +544,14 @@ export const PlanetarySurfaceModal: React.FC<PlanetarySurfaceModalProps> = ({
           </div>
         )}
 
-        {/* --- MAIN SPLIT VIEW (3D CANVAS + DOSSIER CARDS) --- */}
-        <div className="flex-1 flex flex-col lg:flex-row overflow-hidden relative">
-          {/* LEFT: 3D INTERACTIVE GLOBE VIEWPORT */}
-          <div className="relative flex-1 h-[45vh] lg:h-auto bg-slate-950 overflow-hidden">
-            <div ref={canvasMountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
+        {/* --- MAIN SPLIT VIEW (60% 3D CANVAS + 40% DOSSIER CARDS) --- */}
+        <div className="flex-1 flex overflow-hidden relative modal-split-layout" style={{ minHeight: 0 }}>
+          {/* LEFT: 3D INTERACTIVE GLOBE VIEWPORT (60%) */}
+          <div
+            className="relative flex flex-col bg-slate-950 overflow-hidden modal-split-left"
+            style={{ width: '60%', height: '100%', minHeight: 0 }}
+          >
+            <div ref={canvasMountRef} className="w-full h-full cursor-grab active:cursor-grabbing" style={{ minHeight: 0 }} />
 
             {/* Viewport Overlay Controls */}
             <div className="absolute top-4 left-4 pointer-events-none flex flex-col gap-2">
@@ -586,8 +613,17 @@ export const PlanetarySurfaceModal: React.FC<PlanetarySurfaceModalProps> = ({
             </div>
           </div>
 
-          {/* RIGHT: DETAILED SURFACE DOSSIER PANEL */}
-          <div className="w-full lg:w-[480px] flex flex-col border-t lg:border-t-0 lg:border-l border-slate-800 bg-slate-900/80 overflow-y-auto p-5 space-y-4">
+          {/* RIGHT: DETAILED SURFACE DOSSIER PANEL (40%) */}
+          <div
+            className="flex flex-col overflow-y-auto p-5 space-y-4 custom-scrollbar modal-split-right"
+            style={{
+              width: '40%',
+              height: '100%',
+              minHeight: 0,
+              background: 'rgba(15, 23, 42, 0.7)',
+              borderLeft: '1px solid rgba(51, 65, 85, 0.6)',
+            }}
+          >
             {/* --- TAB: SURFACE LANDERS (MARS & MOON) --- */}
             {(activeBody === 'mars' || (activeBody === 'moon' && moonTab === 'landers')) && (
               <>

@@ -201,19 +201,46 @@ input, select, textarea {
 .max-w-2xl { max-width: 42rem; }
 .max-w-4xl { max-width: 56rem; }
 .max-w-5xl { max-width: 64rem; }
+.max-w-6xl { max-width: 72rem; }
 .max-w-7xl { max-width: 80rem; }
 .max-h-60 { max-height: 15rem; }
 .max-h-72 { max-height: 18rem; }
 .max-h-\[88vh\] { max-height: 88vh; }
 .max-h-\[90vh\] { max-height: 90vh; }
+.max-h-\[92vh\] { max-height: 92vh; }
 .h-\[88vh\] { height: 88vh; }
 .h-\[90vh\] { height: 90vh; }
+.h-\[92vh\] { height: 92vh; }
 .max-h-\[calc\(100vh-160px\)\] { max-height: calc(100vh - 160px); }
+
+/* RESPONSIVE MODAL SPLIT UTILITIES */
+.modal-split-layout {
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 860px) {
+  .modal-split-layout {
+    flex-direction: column !important;
+  }
+  .modal-split-left,
+  .modal-split-right {
+    width: 100% !important;
+    height: auto !important;
+    border-left: none !important;
+    border-right: none !important;
+  }
+  .modal-split-left {
+    height: 45vh !important;
+    min-height: 280px !important;
+  }
+}
 
 .z-20 { z-index: 20; }
 .z-30 { z-index: 30; }
 .z-40 { z-index: 40; }
 .z-50 { z-index: 50; }
+.z-60 { z-index: 60; }
 
 .pointer-events-none { pointer-events: none; }
 .pointer-events-auto { pointer-events: auto; }
@@ -328,6 +355,7 @@ input, select, textarea {
 .border-transparent { border-color: transparent !important; }
 
 .border-slate-700 { border-color: #334155; }
+.border-slate-700\/80 { border-color: rgba(51, 65, 85, 0.8); }
 .border-slate-750 { border-color: #273549; }
 .border-slate-800 { border-color: #1e293b; }
 .border-slate-800\/40 { border-color: rgba(30, 41, 59, 0.4); }
@@ -395,6 +423,7 @@ input, select, textarea {
 .bg-slate-950\/60 { background-color: rgba(2, 6, 23, 0.6); }
 .bg-slate-950\/70 { background-color: rgba(2, 6, 23, 0.7); }
 .bg-slate-950\/80 { background-color: rgba(2, 6, 23, 0.8); }
+.bg-slate-950\/85 { background-color: rgba(2, 6, 23, 0.85); }
 .bg-slate-950\/90 { background-color: rgba(2, 6, 23, 0.9); }
 
 .bg-cyan-400 { background-color: #22d3ee; }
