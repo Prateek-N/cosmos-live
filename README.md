@@ -5,137 +5,125 @@
 </p>
 
 <p align="center">
-  <strong>A real-time, browser-native 3D planetary observatory and space science command center powered by NASA APIs, JPL Horizons ephemeris, and WebGL.</strong>
+  <strong>A real-time, browser-native 3D planetary observatory and space science command center powered by live scientific APIs, Keplerian orbital mechanics, and WebGL.</strong>
 </p>
 
 <p align="center">
   <a href="https://cosmos-live.vercel.app/"><img src="https://img.shields.io/badge/Live%20Demo-cosmos--live.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Demo" /></a>
-  <a href="#-live-telemetry--data-sources"><img src="https://img.shields.io/badge/Data-NASA%20Open%20APIs-0B3D91?style=for-the-badge&logo=nasa&logoColor=white" alt="NASA Data" /></a>
-  <a href="#-interactive-capabilities--features"><img src="https://img.shields.io/badge/3D%20Engine-Three.js%20%2F%20WebGL-049EF4?style=for-the-badge&logo=three.js&logoColor=white" alt="Three.js" /></a>
+  <img src="https://img.shields.io/badge/Data-NASA%20%7C%20NOAA%20%7C%20JPL-0B3D91?style=for-the-badge&logo=nasa&logoColor=white" alt="Scientific Feeds" />
+  <img src="https://img.shields.io/badge/3D%20Engine-Three.js%20%2F%20WebGL-049EF4?style=for-the-badge&logo=three.js&logoColor=white" alt="Three.js" />
   <a href="https://react.dev"><img src="https://img.shields.io/badge/Framework-React%2019%20%2B%20TypeScript-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React 19" /></a>
-  <a href="https://vite.dev"><img src="https://img.shields.io/badge/Bundler-Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" /></a>
-  <img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" />
+  <img src="https://img.shields.io/badge/Tests-Vitest%20Passed-3178C6?style=for-the-badge&logo=vitest&logoColor=white" alt="Vitest Tests" />
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" alt="MIT License" /></a>
 </p>
 
 ---
 
 ## 🌌 What is Cosmos Live?
 
-**Cosmos Live** is a state-of-the-art interactive 3D digital planetarium, orbital simulation engine, and multi-mission space dashboard running entirely in modern web browsers without plugins.
+**Cosmos Live** is a browser-native 3D digital planetarium, orbital simulation engine, and multi-mission space dashboard running in modern browsers without plugins or registration.
 
-Unlike static encyclopedias or pre-rendered videos, **Cosmos Live integrates live observational data feeds directly from NASA, the Jet Propulsion Laboratory (JPL), NOAA, and global satellite tracking networks**. It computes precise Keplerian orbits in real time, reproduces realistic planetary atmospheres with custom GLSL shaders, simulates time travel across centuries, and allows users to seamlessly zoom from the macroscopic scale of the solar system down to the landing coordinates of lunar and martian exploration rovers.
-
----
-
-## 🎯 Key Use Cases & Benefits
-
-### 1. 🎓 STEM Education & Academic Research
-* **Visualizing Kepler’s Laws**: Students often struggle to comprehend orbital eccentricity, semi-major axes, and Keplerian orbital velocity in textbooks. Cosmos Live lets students alter time scale up to 100,000× speed to observe retrograde motion, orbital resonances, and perihelion vs. aphelion velocities in real time.
-* **Scale of the Universe**: Switch between scientific true-scale distances and didactic enhanced-visibility modes to understand the sheer vastness of interplanetary space.
-* **Lunar Mechanics**: Demystifies lunar phases, libration, orbital inclination (5.14°), and tidal locking through real-time 3D Earth-Moon system inspection.
-
-### 2. 🔭 Amateur Astronomy & Stargazers
-* **Real-Time Planetary Alignments**: Plan celestial observation nights by checking current planetary positions calculated via high-precision orbital ephemeris.
-* **88 Constellation Stargazer Planetarium**: Look out at the celestial sphere from Earth's perspective with complete Bayer stellar designations, right ascension, and declination grids.
-* **Space Weather Alerts**: Stay updated on Coronal Mass Ejections (CMEs) and Geomagnetic Storms (Kp index) that trigger terrestrial auroras (Northern/Southern Lights).
-
-### 3. 🛰️ Space Exploration Tracking & Mission History
-* **Live Deep Space Network (DSN)**: Inspect real-time downlink and uplink transmissions between NASA's Goldstone, Madrid, and Canberra giant dish antennas and active interplanetary probes (*Voyager 1*, *Voyager 2*, *New Horizons*, *Parker Solar Probe*, *JWST*).
-* **Historical Landing Sites Directory**: Explore 3D interactive terrain sites for iconic historic missions, including *Apollo 11–17*, *Luna*, *Chang'e*, *Chandrayaan*, *Curiosity*, and *Perseverance*.
-* **Live ISS Tracking**: Track the International Space Station’s orbital position, ground track, altitude, velocity, and currently orbiting astronaut crew members.
-
-### 4. 🌍 Planetary Climate & Natural Event Monitoring
-* **Earth Command Center**: Monitor real-time natural events reported by NASA EONET—active wildfires, severe tropical storms, active volcanic eruptions, and polar ice sheet shifts.
-* **DSCOVR Daily Earth Views**: View full-disc color images of Earth captured by the EPIC camera situated 1 million miles away at Sun-Earth Lagrange Point L1.
-
-### 5. 🛡️ Planetary Defense & Asteroid Awareness
-* **Near-Earth Object (NEO) Dashboard**: Real-time tracking of daily close-approaching asteroids, classified by estimated diameter, miss distance (in Lunar Distances and Astronomical Units), and hazard level.
+Rather than relying on static mockups or pre-rendered videos, **Cosmos Live streams live telemetry from NOAA, NASA, the Jet Propulsion Laboratory (JPL), and global satellite tracking feeds**. It computes real-time planetary positions via high-precision VSOP87 analytical theories and custom Keplerian equation solvers, renders custom GLSL atmospheric shaders, supports centuries of historical time travel, and seamlessly transitions from the macroscopic solar system down to road-level terrestrial maps and extraterrestrial landing coordinates.
 
 ---
 
-## 📡 Live Telemetry & API Data Sources
+## 📡 Live Telemetry & Verified Data Sources
 
-Cosmos Live acts as a unified aggregation hub for multiple scientific APIs and authoritative astronomical datasets:
+Cosmos Live operates as a unified aggregation hub for open, authoritative scientific APIs. All external data requests feature automatic timeout aborts and offline fallback fixtures so the application never crashes during network interruptions:
 
-| Data Source / API | Provider | Telemetry Data Stream | Refresh Rate / Coverage |
+| Data Stream | Provider / Service | What the Code Does & Telemetry Delivered | Refresh Rate / Protocol |
 | :--- | :--- | :--- | :--- |
-| **JPL Horizons Ephemeris** | NASA / JPL | Orbital vectors, Keplerian orbital elements (semi-major axis, eccentricity, inclination, longitude of ascending node, perihelion, mean anomaly) | Continuous Real-Time Calculation |
-| **NeoWs (Near Earth Object Web Service)** | NASA Open APIs | Asteroid close approaches, miss distances, relative velocities, estimated minimum/maximum diameters, potentially hazardous asteroid flags | Daily Updates / Real-Time Feed |
-| **EONET (Earth Observatory Natural Event Tracker)** | NASA Earth Science | Active wildland fires, tropical cyclones, volcanic eruptions, iceberg calvings, flood events with GPS coordinates | Real-Time Live Feed |
-| **EPIC (Earth Polychromatic Imaging Camera)** | NASA / NOAA (DSCOVR) | Full-disc natural color Earth photography from Lagrange Point 1 (1,000,000 miles deep space) with cloud formations | Daily Images |
-| **DONKI (Space Weather Database)** | NASA Goddard Space Flight Center | Coronal Mass Ejections (CME), Solar Energetic Particles (SEP), Geomagnetic Storms, Solar Flare classifications (M-Class, X-Class) | Live Notifications & Forecasts |
-| **Mars Rover Photos API** | NASA Open APIs | High-resolution raw photography from *Perseverance*, *Curiosity*, *Opportunity*, and *Spirit* rovers with camera filter selections | By Mission Sol / Earth Date |
-| **APOD (Astronomy Picture of the Day)** | NASA | Daily featured astronomical photograph or video curated by professional astrophysicists with detailed explanations | Daily 00:00 UTC |
-| **Where The ISS At? & OpenNotify** | Open Source ISS API | Real-time latitude, longitude, altitude, velocity, and human crew roster onboard the International Space Station | Live 5-Second Interval |
-| **CelesTrak / TLE Ephemeris** | Space-Track / CelesTrak | Two-Line Element orbital sets for active low Earth orbit satellites (Hubble, Starlink, GPS, GOES Weather) | Real-time SGP4 propagation |
-| **IAU & USGS Lunar Gazetteer** | USGS Astrogeology Science Center | Named lunar maria, craters, impact basins, mountain ranges, and Apollo/Artemis exploration landing coordinates | Curated Spatial Dataset |
+| **Near-Earth Asteroid Radar** | **NASA / JPL Small-Body Database (CAD API)** | Real-time tracking of close-approaching asteroids: miss distances (AU & Lunar Distances), relative velocities, absolute magnitudes, and potentially hazardous asteroid (PHA) flags. | Live Queries / 5-Min Refresh |
+| **NOAA Space Weather** | **NOAA Space Weather Prediction Center (SWPC)** | Real-time Planetary K-index ($K_p$), solar wind velocity ($\text{km/s}$), interplanetary magnetic field ($B_z, B_t$), 10.7cm solar radio flux, and geomagnetic storm scales. | 60-Second Real-Time Poll |
+| **NASA Deep Space Network (DSN)** | **NASA DSN Now (`eyes.nasa.gov`)** | Live dish antenna link status across Goldstone 🇺🇸, Madrid 🇪🇸, and Canberra 🇦🇺 complexes tracking active interplanetary probes (*Voyager 1/2*, *JWST*, *Parker Solar Probe*, *New Horizons*). | 15-Second Interval |
+| **Solar Dynamics Observatory (SDO)** | **NASA SDO & NOAA GOES** | Multi-spectral imagery across AIA 304Å (chromosphere), AIA 171Å (corona loops), and HMI magnetograms, coupled with live GOES X-ray solar flare flux graphs. | 2-Minute Polling |
+| **Earth Natural Hazards (EONET)** | **NASA Earth Science Division** | Global wildland fires, severe tropical storms, active volcanic eruptions, and polar ice shifts plotted directly as 3D pins on the Earth globe. | Live Feed Query |
+| **DSCOVR EPIC Deep Space Views** | **NASA / NOAA (DSCOVR)** | Natural color full-disc Earth photography captured 1,000,000 miles away at Lagrange Point L1 with interactive date-stamped timelapse playback. | Daily Epoch Imagery |
+| **Live ISS Position & Crew** | **WhereTheISS.at & Open Notify** | Live latitude, longitude, altitude, orbital velocity, sunlight/umbra status, and current astronaut roster onboard the International Space Station. | 4-Second Real-Time Poll |
+| **Global Terrestrial Weather** | **Open-Meteo API** | Real-time temperature, wind speed, relative humidity, pressure, and cloud cover for any user-selected GPS coordinate on Earth. | On-Demand Click Query |
+| **Upcoming Rocket Launches** | **The Space Devs (Launch Library 2)** | Upcoming global orbital missions: launch vehicles (Falcon 9, SLS, H3), mission destinations, launch pads, and countdown statuses. | 10-Minute Cache |
+| **Planetary Positions & Ephemeris** | **`astronomy-engine` & Custom Kepler Solver** | VSOP87 analytical planetary algorithms for the Sun, Moon, and 8 classical planets, paired with a custom Newton-Raphson Kepler equation solver ($M = E - e\sin E$) for minor bodies. | 60 FPS Continuous Math |
+| **Terrestrial Satellite Tracks** | **Analytical Inclined Orbital Propagator** | Real-time sub-satellite coordinate propagation computing instantaneous latitude/longitude, altitude, communication horizon radius, and 90-minute orbital ground tracks. | 1-Second Continuous Propagation |
+| **Lunar & Surface Features Gazetteer** | **USGS Astrogeology & IAU Nomenclature** | Curated coordinates, mission profiles, and instruments for Apollo 11–17, Artemis zones, Curiosity, Perseverance, InSight, and Huygens, plus lunar maria and craters. | Curated Geological Catalog |
 
-> **Graceful Offline Architecture**: All data feeds feature built-in fallback fixtures and intelligent caching. If external NASA APIs encounter rate limits or network interruptions, Cosmos Live seamlessly falls back to pre-calculated astronomical tables without crashing or freezing.
-
----
-
-## 🚀 Key Interactive Features
-
-### 1. 🪐 Photorealistic 3D Solar System Engine
-* **Planetary Realism**: High-resolution photorealistic surface textures for Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, and Pluto.
-* **Atmospheric Rayleigh Scattering**: Custom WebGL GLSL fragment & vertex shaders rendering atmospheric glow for Earth, Venus, Mars, Titan, and gas giants.
-* **Solar Corona & Dynamics**: Animated solar flares, surface prominence shaders, and granular convection cells on the Sun.
-* **Planetary Rings**: Textured, shadow-casting ring systems for Saturn, Uranus, and Neptune with accurate tilt angles.
-
-### 2. ⏳ Time-Scrubbing & Orbital Simulation
-* **Precise Temporal Controls**: Travel backward or forward in time with variable warp speeds:
-  `Real-time (1×)` · `10×` · `60× (1 sec = 1 min)` · `3,600× (1 sec = 1 hour)` · `86,400× (1 sec = 1 day)` · `Up to 100,000×`.
-* **Play / Pause / Reset to Real Time**: Instantly resynchronize to the current UTC second.
-* **Orbital Path Visualizations**: Dynamic elliptical orbital trails rendered using Keplerian mechanics with perihelion and aphelion indicators.
-
-### 3. 🔍 Macro-to-Micro Seamless Navigation
-* **Free Orbital Camera**: Smooth 60 FPS orbit, pan, and zoom controls.
-* **Target Focusing**: Lock camera focus onto any planet, dwarf planet, moon, or spacecraft with a single click.
-* **Zoom All the Way In**: Zooming past planetary orbit smoothly transitions into planetary surface modes and continental terrain views.
-
-### 4. 🌕 Moon & Planetary Surface Exploration Hub
-* **Landing Site Coordinates**: Interactive 3D surface landing markers for historical Apollo missions (11, 12, 14, 15, 16, 17), Artemis exploration zones, Luna probes, Chang'e landers, and Chandrayaan-3.
-* **Topography & Features**: Detailed geological profiles for Oceanus Procellarum, Mare Tranquillitatis, Tycho Crater, Copernicus Crater, and lunar south pole permanently shadowed regions.
-* **Surface Telemetry**: Surface gravity, temperature range (-130°C to +120°C), escape velocity, and tidal lock parameters.
-
-### 5. 🛰️ Spacecraft & Deep Space Network (DSN)
-* **Real-Time Dish Telemetry**: Track which ground stations (Canberra 🇦🇺, Madrid 🇪🇸, Goldstone 🇺🇸) are transmitting to deep space probes.
-* **Signal Travel Time**: Calculates light-speed communication delays (e.g., >22 hours one-way for Voyager 1).
-
-### 6. 🎧 Cosmic Audio Synthesizer
-* **Synthesized Ambient Soundscapes**: Procedural Web Audio API sound generator that creates soothing, cinematic space soundscapes.
-* **Planetary Frequency Hums**: Unique audio resonance tailored for each celestial body based on its electromagnetic signature and mass.
+> **100% Keyless & Zero-Config**: All live integrations connect directly to open, public scientific endpoints with graceful offline fallback fixtures. No API keys or environment variables are required.
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## 🚀 Core Capabilities & Technical Architecture
+
+### 1. 🪐 3D Solar System Engine & Custom GLSL Shaders
+* **Photorealistic Planetary Textures**: High-resolution 2K photographic surface maps for Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune, the Moon, and dwarf planets, with procedural canvas fallbacks.
+* **Custom Day/Night Earth Terminator Shader**: A custom Three.js `ShaderMaterial` blending NASA daylight imagery with NASA Black Marble golden city night lights across the twilight zone, enhanced with atmospheric Rayleigh limb scattering.
+* **Saturn's Ring System**: Annular ring geometry with radial UV coordinates mapped to Saturn's ring alpha map with Cassini division transparency.
+* **Procedural 3D Spacecraft Models**: Bespoke 3D procedural meshes for the **ISS** (pressurized modules, truss spine, 8 solar wings, radiators), **Voyager 1** (high-gain dish, RTG boom, magnetometer), and **JWST** (18-segment hexagonal beryllium mirror, Kapton sunshield).
+* **Asteroid Belt**: 3,500 particles distributed between 2.1 and 3.3 AU with vertical dispersion and additive blending.
+
+### 2. 📐 Dual Scale Modes (Logarithmic vs. Realistic)
+* **`explorer` Mode (Default)**: Uses a radial logarithmic distance compression function:
+  $$r_{\text{scene}} = \log_{10}(1 + 15r) \cdot 32 + \sqrt{r} \cdot 8$$
+  Planetary radii are scaled logarithmically so that inner rocky planets and outer gas giants remain clearly visible, distinct, and clickable.
+* **`realistic` Mode**: Renders true Euclidean astronomical units ($1\text{ AU} = 60\text{ scene units}$) and physical scale radii, exposing the true scale and vastness of the interplanetary void.
+
+### 3. ⏳ Time Machine Simulation & Historical Milestones
+* **Temporal Warp Speeds**: Variable simulation speeds from real-time ($1\times$), $100\times$, $10,000\times$, $86,400\times$ (1 day/s), $2,592,000\times$ (1 month/s), up to $31,536,000\times$ (1 year/s), with forward and reverse playback.
+* **Historical Milestones**: Instant epoch jumping to historic space exploration milestones (e.g. Apollo 11 Moon landing 1969, Voyager 1 Jupiter flyby 1979, Halley's Comet perihelion armada 1986, Cassini Saturn orbit insertion 2004, Curiosity landing 2012). The orbital solver repositions every celestial body to its exact historical orbital coordinates.
+
+### 4. 🌍 Earth Command Center & Leaflet Macro-to-Micro Zoom
+* **3D Earth Digital Twin**: Displays atmospheric clouds, day/night city lights, emerald auroral oval rings at the magnetic poles, active 3D satellite constellation beacons, and NASA EONET hazard pins.
+* **Seamless Surface Transition**: Zooming into Earth transitions from Three.js into an interactive **Leaflet** view with **Esri World Satellite Imagery**, OpenStreetMap transportation networks, and administrative boundaries down to street level (zoom 19).
+* **Live Satellite Ground Track**: Visualizes the satellite's projected 90-minute sinusoidal ground track and communications horizon footprint.
+
+### 5. 🔭 Stargazer Planetarium & Celestial Sphere
+* Computes real-time **Greenwich Mean Sidereal Time (GMST)** and **Local Sidereal Time (LST)** based on simulation time and observer geographic coordinates.
+* Converts Right Ascension ($\alpha$) and Declination ($\delta$) to local Altitude and Azimuth coordinates on a 360° celestial dome.
+* Features major seasonal naked-eye constellations and asterisms (Orion, Ursa Major, Cassiopeia, Cygnus, Crux, Scorpius, Taurus, Canis Major, Gemini, Sagittarius, Lyra, Boötes, Pegasus, Andromeda, Centaurus, Leo) with horizon ground planes and altitude guides.
+
+### 6. 🎧 Procedural Web Audio Synthesizer
+* **Ambient Cosmic Space Drone**: Procedurally generated via three detuned oscillators ($55.0\text{ Hz } [A_1]$, $82.4\text{ Hz } [E_2]$, $110.2\text{ Hz } [A_2]$) through a resonant low-pass filter modulated by an ultra-slow $0.07\text{ Hz}$ LFO.
+* **Stellar Wind Hiss**: Real-time pink noise generator providing cosmic background ambience.
+* **Interactive UI Tones**: Web Audio synthesized audio chimes for button clicks, object selections, and warp transitions.
+
+---
+
+## 🛠️ Tech Stack & Directory Structure
 
 ```
 cosmos-live/
+├── .github/
+│   └── workflows/ci.yml         # GitHub Actions automated lint, test & build pipeline
 ├── src/
 │   ├── components/
-│   │   ├── Canvas3D/            # Three.js 3D scene, planetary meshes, shaders, orbits, rings
-│   │   ├── EarthView/           # Earth Command Center, EONET events, continent inspection
-│   │   ├── SurfaceView/         # High-resolution 3D surface landings & lunar/martian terrain
-│   │   ├── Planetarium/         # 88 constellations & celestial sphere stargazer
-│   │   └── HUD/                 # Live telemetry UI, DSN modal, NEO asteroid dashboard, time controls
+│   │   ├── Canvas3D/            # Three.js scene, textures, shaders, procedural spacecraft
+│   │   ├── EarthView/           # Earth Command Center, EONET hazards, Leaflet map
+│   │   ├── SurfaceView/         # 3D planetary landing sites (Moon, Mars, Venus, Titan)
+│   │   ├── Planetarium/         # 360° celestial sphere stargazer & constellations
+│   │   └── HUD/                 # Live telemetry UI, DSN modal, NEO dashboard, time controls
 │   ├── services/
-│   │   ├── ephemeris.ts         # JPL Horizons & Keplerian orbital propagator
-│   │   ├── lunarEphemeris.ts    # Moon orbit, libration & lunar phase calculations
-│   │   ├── realtimeFeeds.ts     # NASA NeoWs, APOD, DONKI, Mars Rover integrations
+│   │   ├── ephemeris.ts         # VSOP87 analytical theories & Keplerian equation solver
+│   │   ├── lunarEphemeris.ts    # Moon phase, illumination fraction, libration & distance
+│   │   ├── realtimeFeeds.ts     # NOAA Space Weather, NASA DSN, JPL CAD, Launch Library 2
+│   │   ├── satelliteTracker.ts  # Analytical inclined satellite orbit propagation
 │   │   ├── eonetService.ts      # NASA Earth Observatory Natural Events
 │   │   ├── epicService.ts       # NASA DSCOVR full-disc Earth photography
-│   │   ├── issTracker.ts        # ISS live position & astronaut manifest
-│   │   ├── sound.ts             # Web Audio API ambient cosmic synthesizer
-│   │   └── solarService.ts      # Space weather & solar flare telemetry
-│   └── data/                    # Astronomical catalogs, landing sites, and offline fallback fixtures
+│   │   ├── issTracker.ts        # ISS live position, astronaut roster, pass predictor
+│   │   ├── weatherService.ts    # Open-Meteo live terrestrial weather integration
+│   │   ├── solarService.ts      # SDO multi-spectral solar imagery & GOES X-ray flux
+│   │   ├── sound.ts             # Web Audio API procedural cosmic synthesizer
+│   │   └── __tests__/           # Automated unit test suite (Vitest)
+│   └── data/                    # Astronomical bodies, satellite catalogs, landing sites
+├── LICENSE                      # Official MIT License
+├── package.json                 # Dependencies and test/build scripts
+└── vercel.json                  # Vercel deployment configuration
 ```
 
 * **Frontend Framework**: React 19 + TypeScript (Strict Type Safety)
-* **3D Rendering**: Three.js (WebGL, Custom GLSL Shaders, Procedural Meshes)
-* **Build System**: Vite (Rolldown / Lightning fast HMR & production bundling)
-* **Audio**: Native Web Audio API (zero external audio asset dependencies)
-* **Icons & Styling**: Lucide React + Glassmorphism Modern UI CSS Tokens
+* **3D Graphics Engine**: Three.js (WebGL, Logarithmic Depth Buffer, Custom GLSL Shaders)
+* **2D Surface Mapping**: Leaflet + Esri World Satellite Imagery + OpenStreetMap Roads
+* **Testing Suite**: Vitest (14 automated unit tests covering orbital math & failover resilience)
+* **Continuous Integration**: GitHub Actions (`.github/workflows/ci.yml`)
+* **Audio Engine**: Native Web Audio API (Zero audio assets downloaded)
+* **Build Tool**: Vite (Lightning fast HMR & production bundling)
 * **Deployment**: Vercel Serverless & Edge Network
 
 ---
@@ -157,19 +145,22 @@ cd cosmos-live
 npm install
 ```
 
-### 3. (Optional) Configure NASA API Key
-By default, Cosmos Live operates seamlessly using NASA's `DEMO_KEY` and built-in offline caches. To unlock higher rate limits (up to 1,000 requests/hour):
-1. Get a free API key at [api.nasa.gov](https://api.nasa.gov/).
-2. Create a `.env.local` file in the project root:
-```env
-VITE_NASA_API_KEY=your_nasa_api_key_here
-```
-
-### 4. Start Development Server
+### 3. Start Development Server
 ```bash
 npm run dev
 ```
 Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### 4. Run Automated Unit Tests
+```bash
+npm test
+```
+Executes the Vitest test suite validating:
+- Keplerian equation Newton-Raphson solver and planetary heliocentric positions
+- Logarithmic vs. realistic coordinate scale transformations
+- Satellite inclined orbital propagation and geographic bounds
+- Lunar phase angles, illumination fraction, and geocentric distances
+- Network error recovery and offline fallback resilience across live feeds
 
 ### 5. Production Build
 ```bash
@@ -181,34 +172,18 @@ Generates an optimized, tree-shaken static production bundle in `dist/`.
 
 ## 🚢 Deployment to Vercel
 
-Cosmos Live is pre-configured for instant zero-configuration deployment on Vercel with [`vercel.json`](./vercel.json) handling SPA routing.
+Cosmos Live is pre-configured for instant deployment on Vercel with [`vercel.json`](./vercel.json) handling SPA routing.
 
-### Option A: 1-Click Import (Recommended)
-1. Visit [vercel.com/new](https://vercel.com/new).
-2. Connect your GitHub account and import the repository: `Prateek-N/cosmos-live`.
-3. Vercel automatically detects the Vite framework settings:
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. Click **Deploy**.
-
-### Option B: Deploy via Vercel CLI
+### Deploy via Vercel CLI
 ```bash
 npm install -g vercel
 vercel --prod
 ```
 
----
-
-## 📜 Scientific References & Acknowledgements
-
-* **NASA Open Data Program**: For public access to JPL Horizons, APOD, NeoWs, EONET, DONKI, and Mars Rover data.
-* **Jet Propulsion Laboratory (JPL)**: For accurate Solar System planetary ephemerides and Keplerian orbital parameters.
-* **USGS Astrogeology Science Center**: For lunar surface nomenclature, crater coordinates, and landing site elevations.
-* **NOAA / NASA DSCOVR**: For Earth Polychromatic Imaging Camera (EPIC) full-disc deep space views.
-* **OpenNotify & WhereTheISS.at**: For real-time ISS orbital tracking telemetry.
+Or connect your GitHub repository directly to [Vercel](https://vercel.com/) for automated CI/CD deployments on push.
 
 ---
 
 ## 📄 License
 
-This project is licensed under the [MIT License](./LICENSE) — free for educational, personal, and commercial exploration.
+This project is licensed under the [MIT License](./LICENSE) — free for educational, personal, and open-source exploration.
